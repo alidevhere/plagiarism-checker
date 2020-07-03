@@ -17,12 +17,14 @@ namespace Plagiarism_Checker
         int WordCount;
         public int  totalWords;
         public Hashtable Htable;
+        public string unchangedFile;
 
         public file(string fileName)
         {
-            string str = File.ReadAllText(fileName);
+            string str;
+            unchangedFile = File.ReadAllText(fileName);
             
-            str = str.Replace("\r","").Replace("\n","").Replace("\r\n", " ");             //replacing new line charaters
+            str = unchangedFile.Replace("\r","").Replace("\n","").Replace("\r\n", " ");             //replacing new line charaters
 
             completeFile = str.Split(' ');             //splitting file into words
          
@@ -52,6 +54,7 @@ namespace Plagiarism_Checker
                         nextWord();
 
                     }
+
 
                 }
                 catch (Exception a)
