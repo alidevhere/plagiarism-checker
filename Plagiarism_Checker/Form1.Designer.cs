@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.output_rtb = new System.Windows.Forms.RichTextBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // output_rtb
@@ -56,6 +57,7 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox output_rtb;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

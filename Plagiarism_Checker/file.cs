@@ -23,10 +23,10 @@ namespace Plagiarism_Checker
         {
             string str;
             unchangedFile = File.ReadAllText(fileName);
-            
-            str = unchangedFile.Replace("\r","").Replace("\n","").Replace("\r\n", " ");             //replacing new line charaters
+            //Replace everything except words by null
+            str = unchangedFile.Replace("\r","").Replace("\n"," ").Replace("\r\n", " ").Replace(","," ").Replace(")"," ").Replace("(", " ").Replace(";"," ");             //replacing new line charaters
 
-            completeFile = str.Split(' ');             //splitting file into words
+            completeFile = str.Split(' ','.',',');             //splitting file into words
          
             totalWords = completeFile.Length;
             WordCount = 0;
@@ -40,17 +40,17 @@ namespace Plagiarism_Checker
                 try
                 {
 
-                    string word = getWord();
+                    string word = getWord().Trim();
                     string key = hashFunction(word);
-                    if (!Htable.ContainsKey(key)&&(word!=null && key!=null))
+                    if (!Htable.ContainsKey(key)&&((!String.IsNullOrEmpty(word)) && (!String.IsNullOrWhiteSpace(word))))
                     {
                         Htable.Add(key, word);
-                        Console.WriteLine("word= " + word + " key= " + key);
+                       // Console.WriteLine("word= " + word + " key= " + key);
                         nextWord();
                     }
                     else
                     {
-                        Console.WriteLine("Duplicate key ignored ==>  " + getWord());
+                       // Console.WriteLine("Duplicate key ignored ==>  " + getWord());
                         nextWord();
 
                     }
