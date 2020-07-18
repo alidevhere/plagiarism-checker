@@ -81,11 +81,7 @@ namespace Plagiarism_Checker
                 
 
             }
-
-//            Console.WriteLine("1 " + hashtables[0].ContainsValue("Machine"));
-//            Console.WriteLine("2 " + hashtables[1].ContainsValue("Machine"));
-//            Console.WriteLine("3 " + hashtables[2].ContainsValue("Machine"));
-//            Console.WriteLine("4 " + hashtables[3].ContainsValue("Machine"));
+            
             Console.WriteLine("Common words are "+commonWords.Count);
 
             foreach (string s in commonWords )
@@ -174,6 +170,39 @@ namespace Plagiarism_Checker
             */
         }
 
-        
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuCustomLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuCustomLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuMaterialTextbox1_OnValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
