@@ -21,24 +21,23 @@ namespace Plagiarism_Checker
 
         private void Form1_Load(object sender, EventArgs e)
         {//93 93 93 93 93 93
-
             //selectFile_dlg.ShowDialog();
             //MessageBox.Show(selectFile_dlg.);
-            Hashtable[] hashtables = new Hashtable[4];
+            Hashtable[] hashtables = new Hashtable[2];
 
             
-            file f1 = new file(@"C:\Users\Ali\Desktop\test1.txt");
+           // file f1 = new file(@"C:\Users\Ali\Desktop\test1.txt");
 
-            file f2 = new file(@"C:\Users\Ali\Desktop\test2.txt");
+           //file f2 = new file(@"C:\Users\Ali\Desktop\test2.txt");
+           //
+           file f3 = new file(@"C:\Users\Ali\Desktop\test3.txt");
 
-            file f3 = new file(@"C:\Users\Ali\Desktop\test3.txt");
-
-            file f4 = new file(@"C:\Users\Ali\Desktop\test4.txt");
-            hashtables[0]= f1.Htable;
-            hashtables[1] = f2.Htable;
-            hashtables[2] = f3.Htable;
-            hashtables[3] = f4.Htable;
-
+           file f4 = new file(@"C:\Users\Ali\Desktop\test4.txt");
+            hashtables[0]= f3.Htable;
+            hashtables[1] = f4.Htable;
+          //  hashtables[2] = f3.Htable;
+          //  hashtables[3] = f4.Htable;
+            
 
             /*
 
@@ -50,130 +49,90 @@ namespace Plagiarism_Checker
 
            */
 
-                //calculate which file has minimun words :test case file 4 has 
+            //calculate which file has minimun words :test case file 4 has 
 
-                List<string> commonWords =f4.Htable.Values.Cast<string>().ToList();
+            List<string> commonWords = new List<string>();//f4.Htable.Values.Cast<string>().ToList();
 
-            for (int i=0;i<hashtables.Length;i++)
+            foreach(DictionaryEntry word in hashtables[0])//currently 4th hashtable is minimum
             {
-                if(i==3)//min hash index from which common words list is taken
+                bool found = false;
+                for(int i=0;i<hashtables.Length;i++)
                 {
-                    continue;
-                }
-
-                List<string> removed = new List<string>();
-                // for(int j=0;j<commonWords.Count;j++)
-                foreach(string s in commonWords)
-                {
-                    if(!hashtables[i].ContainsValue(s))
+                    if(hashtables[i].ContainsValue(word.Value))
                     {
-                        Console.WriteLine("Element removed= "+s+" uncommon with hash table "+i);
-                        //
-                        removed.Add(s);
+                        found = true;
+                    }
+                    else
+                    {
+                        found = false;
+                        break;
                     }
                 }
 
-                foreach (string s in removed)
+                if(found)
                 {
-                    commonWords.Remove(s);
+                    commonWords.Add(word.Value.ToString());
                 }
-
-                
 
             }
 
-//            Console.WriteLine("1 " + hashtables[0].ContainsValue("Machine"));
-//            Console.WriteLine("2 " + hashtables[1].ContainsValue("Machine"));
-//            Console.WriteLine("3 " + hashtables[2].ContainsValue("Machine"));
-//            Console.WriteLine("4 " + hashtables[3].ContainsValue("Machine"));
-            Console.WriteLine("Common words are "+commonWords.Count);
+            //Console.WriteLine("Common words are "+commonWords.Count);
 
+            /*
             foreach (string s in commonWords )
             {
                 Console.WriteLine(s);
             }
 
-
-
-
-
-            /*
-             * 
-            //  Console.Clear();
-            int cw =0;
-            foreach (string key in f.Htable.Keys)
-            {
-                if (f2.Htable.ContainsKey(key))
-                {
-                    cw++;
-                    commonWords.Add((string)f.Htable[key]);
-                  //  Console.WriteLine(String.Format("Common word = {0},key={1}",f.Htable[key],key));
-                }
-                
-            }
-            //Console.WriteLine("total words common= "+cw);
-            output_rtb.Text = "total words common= " + cw+"\r\n";
-            output_rtb.AppendText(f.unchangedFile);
             */
-            //colorText(commonWords);
+
+
+
+            //output_rtb.Text = 
+            //"total words common= " + cw+"\r\n";
+
+            output2_rtb.Text = f3.unchangedFile;
+             output_rtb.Text=f4.unchangedFile;
+             colorText(output_rtb,commonWords);
+
+            colorText(output2_rtb, commonWords);
         }
 
 
-        private void colorText(List<string> list)
-        {/*
-            int i = 0;
-            int current=0;
-            int prev=0;
-            int index;
-            while(i <list.Count)
-            {
-                index = output_rtb.Find(list[i], current, RichTextBoxFinds.WholeWord);
-                if (selectIndex == -1)
-                {
-
-                    Console.WriteLine(list[i] + "  not found in text box");
-                    break;
-                }
-                output_rtb.SelectionStart =index;
-                output_rtb.SelectionLength = list[i].Length;
-                output_rtb.SelectionBackColor = Color.Green;
-                Console.WriteLine("index==" + selectIndex);
-                index = current + list[i].Length;
-            }
-
-
-            */
-
-
-
-
-            /*
-            int index = 0;
-            int selectIndex=-1;
+        private void colorText(RichTextBox rt, List<string> list)
+        {
+           // Console.WriteLine(list[0]+" len ="+list[0].Length);
             for (int i = 0; i < list.Count; i++)
             {
-               
-                for (selectIndex = 0; selectIndex < output_rtb.TextLength; selectIndex++)
+                int start = 0;
+                int H_index = 0;
+                while (start<rt.TextLength)
                 {
 
-                    selectIndex = output_rtb.Find(list[i], index, RichTextBoxFinds.WholeWord);
-                    if (selectIndex == -1)
+                   // Console.WriteLine("starting search at =" + start);
+                    H_index = rt.Find(list[i], start, RichTextBoxFinds.WholeWord);
+                  //  Console.WriteLine("found " + list[i] + " at index " + H_index);
+
+                    if (H_index != -1)
                     {
-                        
-                        Console.WriteLine(list[i] + "  not found in text box");
-                        break;
+                        rt.SelectionStart = H_index;
+                        rt.SelectionLength = list[i].Length;
+                        rt.SelectionBackColor = Color.Yellow;
                     }
-                    output_rtb.SelectionStart = selectIndex;
-                    output_rtb.SelectionLength = list[i].Length;
-                    output_rtb.SelectionBackColor = Color.Green;
-                    Console.WriteLine("index==" + selectIndex);
-                    index = selectIndex + list[i].Length;
+                    else
+                    {
+                     //   Console.WriteLine("breaking loop..");
+                        break;
+                     }
+                    start = H_index + list[i].Length;
+
+                  //   Console.WriteLine("next start ="+start);
+
                 }
 
             }
-            */
         }
-
         
+
     }
 }
