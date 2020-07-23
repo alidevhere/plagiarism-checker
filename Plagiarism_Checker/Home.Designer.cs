@@ -33,14 +33,19 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.fileTypedd = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.chooseFolder_btn = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.no_file_lbl = new System.Windows.Forms.Label();
+            this.filesInfo_GV = new System.Windows.Forms.DataGridView();
+            this.fname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fsize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifiDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filesInfo_GV)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +85,6 @@
             this.label2.Size = new System.Drawing.Size(68, 19);
             this.label2.TabIndex = 2;
             this.label2.Text = "File Type";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -93,25 +97,18 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Selected Folder";
             // 
-            // label4
+            // fileTypedd
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(185, 228);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(122, 19);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Total No. of Files";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(350, 136);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(258, 21);
-            this.comboBox1.TabIndex = 6;
+            this.fileTypedd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fileTypedd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.fileTypedd.FormattingEnabled = true;
+            this.fileTypedd.Items.AddRange(new object[] {
+            "English Text",
+            "C++ Code"});
+            this.fileTypedd.Location = new System.Drawing.Point(350, 136);
+            this.fileTypedd.Name = "fileTypedd";
+            this.fileTypedd.Size = new System.Drawing.Size(258, 21);
+            this.fileTypedd.TabIndex = 6;
             // 
             // textBox1
             // 
@@ -120,38 +117,16 @@
             this.textBox1.Size = new System.Drawing.Size(258, 20);
             this.textBox1.TabIndex = 7;
             // 
-            // radioButton1
+            // chooseFolder_btn
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(364, 230);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(70, 17);
-            this.radioButton1.TabIndex = 8;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Two Files";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(491, 230);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(125, 17);
-            this.radioButton2.TabIndex = 9;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "More Than Two Files";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(651, 177);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Choose Folder";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.chooseFolder_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chooseFolder_btn.Location = new System.Drawing.Point(651, 177);
+            this.chooseFolder_btn.Name = "chooseFolder_btn";
+            this.chooseFolder_btn.Size = new System.Drawing.Size(108, 23);
+            this.chooseFolder_btn.TabIndex = 10;
+            this.chooseFolder_btn.Text = "Choose Folder";
+            this.chooseFolder_btn.UseVisualStyleBackColor = true;
+            this.chooseFolder_btn.Click += new System.EventHandler(this.chooseFolder_btn_Click);
             // 
             // button2
             // 
@@ -162,20 +137,77 @@
             this.button2.TabIndex = 11;
             this.button2.Text = "Check Plagiarism";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(166, 231);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(141, 19);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "No. of selected files";
+            // 
+            // no_file_lbl
+            // 
+            this.no_file_lbl.AutoSize = true;
+            this.no_file_lbl.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.no_file_lbl.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.no_file_lbl.Location = new System.Drawing.Point(355, 231);
+            this.no_file_lbl.Name = "no_file_lbl";
+            this.no_file_lbl.Size = new System.Drawing.Size(17, 19);
+            this.no_file_lbl.TabIndex = 14;
+            this.no_file_lbl.Text = "0";
+            // 
+            // filesInfo_GV
+            // 
+            this.filesInfo_GV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.filesInfo_GV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fname,
+            this.fsize,
+            this.modifiDate});
+            this.filesInfo_GV.Location = new System.Drawing.Point(141, 319);
+            this.filesInfo_GV.Name = "filesInfo_GV";
+            this.filesInfo_GV.Size = new System.Drawing.Size(607, 151);
+            this.filesInfo_GV.TabIndex = 15;
+            // 
+            // fname
+            // 
+            this.fname.HeaderText = "File Name";
+            this.fname.Name = "fname";
+            this.fname.ReadOnly = true;
+            this.fname.Width = 200;
+            // 
+            // fsize
+            // 
+            this.fsize.HeaderText = "File Size";
+            this.fsize.Name = "fsize";
+            this.fsize.ReadOnly = true;
+            // 
+            // modifiDate
+            // 
+            this.modifiDate.HeaderText = "Last Modified";
+            this.modifiDate.Name = "modifiDate";
+            this.modifiDate.ReadOnly = true;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(947, 522);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.filesInfo_GV);
+            this.Controls.Add(this.no_file_lbl);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.chooseFolder_btn);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.fileTypedd);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -184,6 +216,7 @@
             this.Name = "Home";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filesInfo_GV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,12 +229,16 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox fileTypedd;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button chooseFolder_btn;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label no_file_lbl;
+        private System.Windows.Forms.DataGridView filesInfo_GV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fsize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modifiDate;
     }
 }

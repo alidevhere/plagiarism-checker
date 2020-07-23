@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,54 +18,39 @@ namespace Plagiarism_Checker
             InitializeComponent();
         }
 
-        private void bunifuCustomLabel1_Click(object sender, EventArgs e)
+        private void chooseFolder_btn_Click(object sender, EventArgs e)
         {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
 
-        }
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
 
-        private void bunifuCustomLabel2_Click(object sender, EventArgs e)
-        {
+                 //   string[] files = Directory.(fbd.SelectedPath, "*.txt");
+                      foreach (string file in Directory.EnumerateFiles(fbd.SelectedPath, "*.txt"))
+                      {
 
-        }
+                        FileInfo fi = new FileInfo(file);
+                        
+                        //MessageBox.Show(file+" "+ fi.Length);
 
-        private void bunifuCustomLabel3_Click(object sender, EventArgs e)
-        {
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.CreateCells(filesInfo_GV);
+                        row.Cells[0].Value = fi.Name;
+                        row.Cells[1].Value = fi.Length;
+                        row.Cells[2].Value = fi.LastWriteTime;
 
-        }
+                        filesInfo_GV.Rows.Add(row);
 
-        private void bunifuCustomLabel4_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void bunifuThinButton21_Click(object sender, EventArgs e)
-        {
 
-        }
+                      }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+                    // System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+                }
+            }
         }
     }
 }
