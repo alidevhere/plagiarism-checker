@@ -28,26 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.SuspendLayout();
             // 
-            // label1
+            // bunifuCustomLabel1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(251, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 26);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Plagarism Checker";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.bunifuCustomLabel1.AutoSize = true;
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(121, 100);
+            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(46, 13);
+            this.bunifuCustomLabel1.TabIndex = 1;
+            this.bunifuCustomLabel1.Text = "File type";
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.bunifuCustomLabel1);
             this.Name = "Home";
             this.Text = "Home";
             this.ResumeLayout(false);
@@ -57,6 +55,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
     }
 }
