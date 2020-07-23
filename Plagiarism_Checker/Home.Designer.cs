@@ -33,14 +33,14 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.fileTypedd = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.folder_txt = new System.Windows.Forms.TextBox();
             this.chooseFolder_btn = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label4 = new System.Windows.Forms.Label();
             this.no_file_lbl = new System.Windows.Forms.Label();
             this.filesInfo_GV = new System.Windows.Forms.DataGridView();
+            this.txt_rb = new System.Windows.Forms.RadioButton();
+            this.cpp_rb = new System.Windows.Forms.RadioButton();
             this.fname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fsize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modifiDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,7 +65,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(947, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1055, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -97,25 +97,12 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Selected Folder";
             // 
-            // fileTypedd
+            // folder_txt
             // 
-            this.fileTypedd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fileTypedd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.fileTypedd.FormattingEnabled = true;
-            this.fileTypedd.Items.AddRange(new object[] {
-            "English Text",
-            "C++ Code"});
-            this.fileTypedd.Location = new System.Drawing.Point(350, 136);
-            this.fileTypedd.Name = "fileTypedd";
-            this.fileTypedd.Size = new System.Drawing.Size(258, 21);
-            this.fileTypedd.TabIndex = 6;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(350, 177);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(258, 20);
-            this.textBox1.TabIndex = 7;
+            this.folder_txt.Location = new System.Drawing.Point(350, 177);
+            this.folder_txt.Name = "folder_txt";
+            this.folder_txt.Size = new System.Drawing.Size(258, 20);
+            this.folder_txt.TabIndex = 7;
             // 
             // chooseFolder_btn
             // 
@@ -131,16 +118,12 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(810, 359);
+            this.button2.Location = new System.Drawing.Point(918, 454);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 23);
             this.button2.TabIndex = 11;
             this.button2.Text = "Check Plagiarism";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // label4
             // 
@@ -166,15 +149,42 @@
             // 
             // filesInfo_GV
             // 
+            this.filesInfo_GV.AllowUserToAddRows = false;
+            this.filesInfo_GV.AllowUserToDeleteRows = false;
             this.filesInfo_GV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.filesInfo_GV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fname,
             this.fsize,
             this.modifiDate});
-            this.filesInfo_GV.Location = new System.Drawing.Point(141, 319);
+            this.filesInfo_GV.Location = new System.Drawing.Point(150, 288);
             this.filesInfo_GV.Name = "filesInfo_GV";
-            this.filesInfo_GV.Size = new System.Drawing.Size(607, 151);
+            this.filesInfo_GV.ReadOnly = true;
+            this.filesInfo_GV.Size = new System.Drawing.Size(644, 151);
             this.filesInfo_GV.TabIndex = 15;
+            // 
+            // txt_rb
+            // 
+            this.txt_rb.AutoSize = true;
+            this.txt_rb.Checked = true;
+            this.txt_rb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_rb.Location = new System.Drawing.Point(350, 136);
+            this.txt_rb.Name = "txt_rb";
+            this.txt_rb.Size = new System.Drawing.Size(111, 20);
+            this.txt_rb.TabIndex = 16;
+            this.txt_rb.TabStop = true;
+            this.txt_rb.Text = "English Text";
+            this.txt_rb.UseVisualStyleBackColor = true;
+            // 
+            // cpp_rb
+            // 
+            this.cpp_rb.AutoSize = true;
+            this.cpp_rb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpp_rb.Location = new System.Drawing.Point(497, 136);
+            this.cpp_rb.Name = "cpp_rb";
+            this.cpp_rb.Size = new System.Drawing.Size(82, 20);
+            this.cpp_rb.TabIndex = 17;
+            this.cpp_rb.Text = "C++ File";
+            this.cpp_rb.UseVisualStyleBackColor = true;
             // 
             // fname
             // 
@@ -188,26 +198,29 @@
             this.fsize.HeaderText = "File Size";
             this.fsize.Name = "fsize";
             this.fsize.ReadOnly = true;
+            this.fsize.Width = 200;
             // 
             // modifiDate
             // 
             this.modifiDate.HeaderText = "Last Modified";
             this.modifiDate.Name = "modifiDate";
             this.modifiDate.ReadOnly = true;
+            this.modifiDate.Width = 200;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
-            this.ClientSize = new System.Drawing.Size(947, 522);
+            this.ClientSize = new System.Drawing.Size(1055, 522);
+            this.Controls.Add(this.cpp_rb);
+            this.Controls.Add(this.txt_rb);
             this.Controls.Add(this.filesInfo_GV);
             this.Controls.Add(this.no_file_lbl);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.chooseFolder_btn);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.fileTypedd);
+            this.Controls.Add(this.folder_txt);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -229,14 +242,14 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox fileTypedd;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox folder_txt;
         private System.Windows.Forms.Button chooseFolder_btn;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label no_file_lbl;
         private System.Windows.Forms.DataGridView filesInfo_GV;
+        private System.Windows.Forms.RadioButton txt_rb;
+        private System.Windows.Forms.RadioButton cpp_rb;
         private System.Windows.Forms.DataGridViewTextBoxColumn fname;
         private System.Windows.Forms.DataGridViewTextBoxColumn fsize;
         private System.Windows.Forms.DataGridViewTextBoxColumn modifiDate;
