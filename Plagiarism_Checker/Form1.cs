@@ -91,11 +91,11 @@ namespace Plagiarism_Checker
             //output_rtb.Text = 
             //"total words common= " + cw+"\r\n";
 
-            output2_rtb.Text = f3.unchangedFile;
-             output_rtb.Text=f4.unchangedFile;
-             colorText(output_rtb,commonWords);
-
-            colorText(output2_rtb, commonWords);
+            //output2_rtb.Text = f3.unchangedFile;
+            // output_rtb.Text=f4.unchangedFile;
+            // colorText(output_rtb,commonWords);
+            //
+            //colorText(output2_rtb, commonWords);
         }
 
 
