@@ -18,16 +18,19 @@ namespace Plagiarism_Checker
         public int  totalWords;
         public Hashtable Htable;
         public string unchangedFile;
+        public string fileName;         // only contains file name without any path
 
         public file(string fileName)
         {
+            this.fileName = Path.GetFileName(fileName);
             string str;
             unchangedFile = File.ReadAllText(fileName);
             //Replace everything except words by null
             str = unchangedFile.Replace("\r","").Replace("\n"," ").Replace("\r\n", " ").Replace(","," ").Replace(")"," ").Replace("(", " ").Replace(";"," ");             //replacing new line charaters
 
-            completeFile = str.Split(' ','.',',');             //splitting file into words
-         
+            //str.Split(' ','.',',')
+            completeFile = str.Split(' ','.',',', '\r', '\n');             //splitting file into words
+
             totalWords = completeFile.Length;
             WordCount = 0;
 
@@ -64,6 +67,10 @@ namespace Plagiarism_Checker
                     
                 }
             }
+
+
+            totalWords = Htable.Count;
+
         }
 
         public string hashFunction(string str)
@@ -86,7 +93,7 @@ namespace Plagiarism_Checker
             }
             else
             {
-                return "NULL_RETURNED";
+                return "";
             }
 
             
