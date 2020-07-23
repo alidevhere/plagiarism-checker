@@ -14,19 +14,21 @@ namespace Plagiarism_Checker
     public partial class Home : Form
     {
         private string fileType;
-        private List <string> filePaths;
+        private List<string> filePaths;
 
         public Home()
         {
             InitializeComponent();
+            filePaths = new List<string>();
         }
 
         private void chooseFolder_btn_Click(object sender, EventArgs e)
         {
-            if(txt_rb.Checked)
+            if (txt_rb.Checked)
             {
                 fileType = "*.txt";
-            }else if(cpp_rb.Checked)
+            }
+            else if (cpp_rb.Checked)
             {
                 fileType = "*.cpp";
             }
@@ -39,9 +41,9 @@ namespace Plagiarism_Checker
                 {
                     filesInfo_GV.Rows.Clear();
                     filePaths.Clear();
-                        int count = 0;
+                    int count = 0;
 
-                      foreach (string file in Directory.EnumerateFiles(fbd.SelectedPath, fileType))//"*.txt"
+                    foreach (string file in Directory.EnumerateFiles(fbd.SelectedPath, fileType))//"*.txt"
                     {
 
                         FileInfo fi = new FileInfo(file);
@@ -54,15 +56,16 @@ namespace Plagiarism_Checker
                         filesInfo_GV.Rows.Add(row);
                         filePaths.Add(fi.FullName);
                         count++;
-                        
-                      }
-                    no_file_lbl.Text = count+"";
+
+                    }
+                    no_file_lbl.Text = count + "";
                     folder_txt.Text = fbd.SelectedPath;
-                    if(count==0)
+                    if (count == 0)
                     {
-                        MessageBox.Show("Folder does not contains specified files !!","ERROR : 404 NOT FOUND ");
+                        MessageBox.Show("Folder does not contains specified files !!", "ERROR : 404 NOT FOUND ");
                         folder_txt.Text = "";
-                    }else if(count==1)
+                    }
+                    else if (count == 1)
                     {
                         MessageBox.Show("Please select more than one file to proceed", "ERROR : PROCESS ABORTED ");
                         folder_txt.Text = "";
@@ -75,6 +78,58 @@ namespace Plagiarism_Checker
             }
         }
 
-       
+        private void check_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                file[] targetFiles = new file[filePaths.Count];
+                int minHashIndex = 0;
+                int i = 0;
+                foreach (string path in filePaths)
+                {
+                    targetFiles[i] = new file(path);
+
+                    //find minimum length hash table
+                    if (targetFiles[i].Htable.Count <= targetFiles[minHashIndex].Htable.Count)
+                    {
+                        minHashIndex = i;
+                    }
+                    i++;
+
+                    Console.WriteLine("Min hash index= " + minHashIndex + " Min hash count=" + targetFiles[minHashIndex].Htable.Count);
+                    //Console.WriteLine("");
+
+                }
+
+                //Now create list of common words which consists of least length hash table
+
+                List<string> CommonWords = targetFiles[minHashIndex].Htable.Values.Cast<string>().ToList();//cast the hash table values into list
+
+                Console.WriteLine("Common words = " + CommonWords.Count);
+
+                for (int k = 0; k < targetFiles.Length; k++)
+                {
+                    if (k != minHashIndex)
+                    {
+                        targetFiles[k].Compare(CommonWords);
+                    }
+                    Console.WriteLine("After checking " + k + " Common words = " + CommonWords.Count);
+                }
+
+                this.Hide();
+                new Result(targetFiles,CommonWords).ShowDialog();
+
+            }
+            catch
+            {
+                Console.WriteLine("EXCEPTION : PARAMETERS FAILED");
+            }
+
+
+
+
+
+
+        }
     }
 }

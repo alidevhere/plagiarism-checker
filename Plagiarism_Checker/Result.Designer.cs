@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.ComnCount_lbl = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,19 +50,17 @@
             this.label1.Size = new System.Drawing.Size(108, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Common Words";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // label2
+            // ComnCount_lbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(510, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "0";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.ComnCount_lbl.AutoSize = true;
+            this.ComnCount_lbl.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ComnCount_lbl.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComnCount_lbl.Location = new System.Drawing.Point(510, 24);
+            this.ComnCount_lbl.Name = "ComnCount_lbl";
+            this.ComnCount_lbl.Size = new System.Drawing.Size(15, 17);
+            this.ComnCount_lbl.TabIndex = 1;
+            this.ComnCount_lbl.Text = "0";
             // 
             // label3
             // 
@@ -113,15 +111,15 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(573, 67);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(170, 21);
             this.comboBox1.TabIndex = 6;
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(196, 78);
+            this.comboBox2.Location = new System.Drawing.Point(192, 78);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.Size = new System.Drawing.Size(149, 21);
             this.comboBox2.TabIndex = 7;
             // 
             // richTextBox1
@@ -131,7 +129,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(474, 389);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // richTextBox2
             // 
@@ -145,7 +142,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 549);
+            this.BackColor = System.Drawing.Color.Teal;
+            this.ClientSize = new System.Drawing.Size(1057, 549);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.comboBox2);
@@ -154,11 +152,10 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.ComnCount_lbl);
             this.Controls.Add(this.label1);
             this.Name = "Result";
             this.Text = "Result";
-            this.Load += new System.EventHandler(this.Result_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,7 +164,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label ComnCount_lbl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

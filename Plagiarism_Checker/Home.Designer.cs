@@ -35,15 +35,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.folder_txt = new System.Windows.Forms.TextBox();
             this.chooseFolder_btn = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.check_btn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.no_file_lbl = new System.Windows.Forms.Label();
             this.filesInfo_GV = new System.Windows.Forms.DataGridView();
-            this.txt_rb = new System.Windows.Forms.RadioButton();
-            this.cpp_rb = new System.Windows.Forms.RadioButton();
             this.fname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fsize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modifiDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_rb = new System.Windows.Forms.RadioButton();
+            this.cpp_rb = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filesInfo_GV)).BeginInit();
             this.SuspendLayout();
@@ -115,15 +115,16 @@
             this.chooseFolder_btn.UseVisualStyleBackColor = true;
             this.chooseFolder_btn.Click += new System.EventHandler(this.chooseFolder_btn_Click);
             // 
-            // button2
+            // check_btn
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(918, 454);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Check Plagiarism";
-            this.button2.UseVisualStyleBackColor = true;
+            this.check_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.check_btn.Location = new System.Drawing.Point(918, 454);
+            this.check_btn.Name = "check_btn";
+            this.check_btn.Size = new System.Drawing.Size(125, 23);
+            this.check_btn.TabIndex = 11;
+            this.check_btn.Text = "Check Plagiarism";
+            this.check_btn.UseVisualStyleBackColor = true;
+            this.check_btn.Click += new System.EventHandler(this.check_btn_Click);
             // 
             // label4
             // 
@@ -162,6 +163,27 @@
             this.filesInfo_GV.Size = new System.Drawing.Size(644, 151);
             this.filesInfo_GV.TabIndex = 15;
             // 
+            // fname
+            // 
+            this.fname.HeaderText = "File Name";
+            this.fname.Name = "fname";
+            this.fname.ReadOnly = true;
+            this.fname.Width = 200;
+            // 
+            // fsize
+            // 
+            this.fsize.HeaderText = "File Size";
+            this.fsize.Name = "fsize";
+            this.fsize.ReadOnly = true;
+            this.fsize.Width = 200;
+            // 
+            // modifiDate
+            // 
+            this.modifiDate.HeaderText = "Last Modified";
+            this.modifiDate.Name = "modifiDate";
+            this.modifiDate.ReadOnly = true;
+            this.modifiDate.Width = 200;
+            // 
             // txt_rb
             // 
             this.txt_rb.AutoSize = true;
@@ -186,27 +208,6 @@
             this.cpp_rb.Text = "C++ File";
             this.cpp_rb.UseVisualStyleBackColor = true;
             // 
-            // fname
-            // 
-            this.fname.HeaderText = "File Name";
-            this.fname.Name = "fname";
-            this.fname.ReadOnly = true;
-            this.fname.Width = 200;
-            // 
-            // fsize
-            // 
-            this.fsize.HeaderText = "File Size";
-            this.fsize.Name = "fsize";
-            this.fsize.ReadOnly = true;
-            this.fsize.Width = 200;
-            // 
-            // modifiDate
-            // 
-            this.modifiDate.HeaderText = "Last Modified";
-            this.modifiDate.Name = "modifiDate";
-            this.modifiDate.ReadOnly = true;
-            this.modifiDate.Width = 200;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,7 +219,7 @@
             this.Controls.Add(this.filesInfo_GV);
             this.Controls.Add(this.no_file_lbl);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.check_btn);
             this.Controls.Add(this.chooseFolder_btn);
             this.Controls.Add(this.folder_txt);
             this.Controls.Add(this.label3);
@@ -244,7 +245,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox folder_txt;
         private System.Windows.Forms.Button chooseFolder_btn;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button check_btn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label no_file_lbl;
         private System.Windows.Forms.DataGridView filesInfo_GV;

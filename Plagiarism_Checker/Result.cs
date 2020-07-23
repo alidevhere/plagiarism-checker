@@ -12,29 +12,20 @@ namespace Plagiarism_Checker
 {
     public partial class Result : Form
     {
+
+
+        public Result(file[] targetFiles, List<string> CommonWords)
+        {
+            InitializeComponent();
+
+            ComnCount_lbl.Text = CommonWords.Count.ToString();
+        }
+
+
         public Result()
         {
             InitializeComponent();
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Result_Load(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

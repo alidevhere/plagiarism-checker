@@ -44,6 +44,7 @@ namespace Plagiarism_Checker
                     string key = hashFunction(word);
                     if (!Htable.ContainsKey(key)&&((!String.IsNullOrEmpty(word)) && (!String.IsNullOrWhiteSpace(word))))
                     {
+
                         Htable.Add(key, word);
                        // Console.WriteLine("word= " + word + " key= " + key);
                         nextWord();
@@ -67,10 +68,6 @@ namespace Plagiarism_Checker
 
         public string hashFunction(string str)
         {
-            if (str == "")
-            {
-                return "NULL_STRING";
-            }
             string r = "";
             for (int i = 0; i < str.Length; i++)
             {
@@ -101,11 +98,24 @@ namespace Plagiarism_Checker
             {
                 WordCount++;
             }
-
-
         }
-
-
+        /// <summary>
+        /// Takes a hash table and compares it with its own hash table and adds 
+        /// the common words in passed list 'CommonWords' we assume that list already contains 
+        /// all common words and we have to only remove the words which are not found. 
+        /// </summary>
+        /// <param name="ht"></param>
+        /// <param name="CommonWords"></param>
+        public void Compare(List<string>CommonWords)
+        {
+            for(int i=0;i<CommonWords.Count;i++)
+            {
+                if(!Htable.ContainsValue(CommonWords.ElementAt(i)))
+                {
+                    CommonWords.RemoveAt(i);//remove uncommon words from common list
+                }
+            }
+        }
 
     }
 }
