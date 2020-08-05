@@ -84,19 +84,15 @@ namespace Plagiarism_Checker
             {
                 FileInfo fi = new FileInfo(filePaths[0]);
 
-                if(fi.Extension==".cpp")
+                if (fi.Extension == ".cpp")
                 {
-
-
-
                     string[] f = File.ReadAllLines(filePaths[0]);
 
-
-                    for(int i=0;i< f.Length;i++)
+                    for (int i = 0; i < f.Length; i++)
                     {
-                        string s=f[i];
-                       // Console.WriteLine(s);
-                        if(s.StartsWith("#"))
+                        string s = f[i];
+                        // Console.WriteLine(s);
+                        if (s.StartsWith("#"))
                         {
                             f[i] = "<DIRECTIVE>";
                         }
@@ -112,46 +108,55 @@ namespace Plagiarism_Checker
 
 
                 }
-                else if(fi.Extension == ".txt")
-                      {
+                else if (fi.Extension == ".txt")// && no_file_lbl.Text.Trim().Equals("2"))
+                {
 
-                    file[] targetFiles = new file[filePaths.Count];
-                    int minHashIndex = 0;
-                    int i = 0;
-                    foreach (string path in filePaths)
+                    if (no_file_lbl.Text.Trim().Equals("2"))//smaller than two are handled earlier
                     {
-                        targetFiles[i] = new file(path);
-
-                        //find minimum length hash table
-                        if (targetFiles[i].Htable.Count <= targetFiles[minHashIndex].Htable.Count)
+                        file[] targetFiles = new file[filePaths.Count];
+                        int minHashIndex = 0;
+                        int i = 0;
+                        foreach (string path in filePaths)
                         {
-                            minHashIndex = i;
+                            targetFiles[i] = new file(path);
+
+                            //find minimum length hash table
+                            if (targetFiles[i].Htable.Count <= targetFiles[minHashIndex].Htable.Count)
+                            {
+                                minHashIndex = i;
+                            }
+                            i++;
+
+                            Console.WriteLine("Min hash index= " + minHashIndex + " Min hash count=" + targetFiles[minHashIndex].Htable.Count);
+                            //Console.WriteLine("");
+
                         }
-                        i++;
 
-                        Console.WriteLine("Min hash index= " + minHashIndex + " Min hash count=" + targetFiles[minHashIndex].Htable.Count);
-                        //Console.WriteLine("");
+                        //Now create list of common words which consists of least length hash table
 
-                    }
+                        List<string> CommonWords = targetFiles[minHashIndex].Htable.Values.Cast<string>().ToList();//cast the hash table values into list
 
-                    //Now create list of common words which consists of least length hash table
+                        Console.WriteLine("Common words = " + CommonWords.Count);
 
-                    List<string> CommonWords = targetFiles[minHashIndex].Htable.Values.Cast<string>().ToList();//cast the hash table values into list
+                        for (int k = 0; k < targetFiles.Length; k++)
+                        {
+                            if (k != minHashIndex)
+                            {
+                                targetFiles[k].Compare(CommonWords);
+                            }
+                            Console.WriteLine("After checking " + k + " Common words = " + CommonWords.Count);
+                        }
 
-                    Console.WriteLine("Common words = " + CommonWords.Count);
+                        this.Hide();
+                        new Result(targetFiles, CommonWords).ShowDialog();
 
-                    for (int k = 0; k < targetFiles.Length; k++)
+
+                    }//greater than 2
+                    else
                     {
-                        if (k != minHashIndex)
-                        {
-                            targetFiles[k].Compare(CommonWords);
-                        }
-                        Console.WriteLine("After checking " + k + " Common words = " + CommonWords.Count);
+                        this.Hide();
+                        new MultipleFiles(filePaths).ShowDialog();
                     }
-
-                    this.Hide();
-                    new Result(targetFiles, CommonWords).ShowDialog();
-
                 }
 
             }
