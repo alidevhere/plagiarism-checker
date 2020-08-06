@@ -13,30 +13,16 @@ namespace Plagiarism_Checker
 {
     public partial class MultipleFiles : Form
     {
-        file[] targetFiles; 
         private List<string> filePaths;
         public MultipleFiles(List<string> filePaths)
         {
             InitializeComponent();
             this.filePaths = filePaths;
 
-            targetFiles= new file[filePaths.Count];
-
-
             DataGridView gv = createGridView();
             mf_pnl.Controls.Add(gv);
            // this.Controls.Add(gv);
         }
-
-
-
-
-
-
-
-
-
-
 
         private void MultipleFiles_Load(object sender, EventArgs e)
         {
