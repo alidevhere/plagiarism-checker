@@ -39,11 +39,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.no_file_lbl = new System.Windows.Forms.Label();
             this.filesInfo_GV = new System.Windows.Forms.DataGridView();
-            this.txt_rb = new System.Windows.Forms.RadioButton();
-            this.cpp_rb = new System.Windows.Forms.RadioButton();
             this.fname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fsize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modifiDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_rb = new System.Windows.Forms.RadioButton();
+            this.cpp_rb = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filesInfo_GV)).BeginInit();
             this.SuspendLayout();
@@ -163,6 +163,27 @@
             this.filesInfo_GV.Size = new System.Drawing.Size(644, 151);
             this.filesInfo_GV.TabIndex = 15;
             // 
+            // fname
+            // 
+            this.fname.HeaderText = "File Name";
+            this.fname.Name = "fname";
+            this.fname.ReadOnly = true;
+            this.fname.Width = 200;
+            // 
+            // fsize
+            // 
+            this.fsize.HeaderText = "File Size";
+            this.fsize.Name = "fsize";
+            this.fsize.ReadOnly = true;
+            this.fsize.Width = 200;
+            // 
+            // modifiDate
+            // 
+            this.modifiDate.HeaderText = "Last Modified";
+            this.modifiDate.Name = "modifiDate";
+            this.modifiDate.ReadOnly = true;
+            this.modifiDate.Width = 200;
+            // 
             // txt_rb
             // 
             this.txt_rb.AutoSize = true;
@@ -186,27 +207,6 @@
             this.cpp_rb.TabIndex = 17;
             this.cpp_rb.Text = "C++ File";
             this.cpp_rb.UseVisualStyleBackColor = true;
-            // 
-            // fname
-            // 
-            this.fname.HeaderText = "File Name";
-            this.fname.Name = "fname";
-            this.fname.ReadOnly = true;
-            this.fname.Width = 200;
-            // 
-            // fsize
-            // 
-            this.fsize.HeaderText = "File Size (Bytes)";
-            this.fsize.Name = "fsize";
-            this.fsize.ReadOnly = true;
-            this.fsize.Width = 200;
-            // 
-            // modifiDate
-            // 
-            this.modifiDate.HeaderText = "Last Modified";
-            this.modifiDate.Name = "modifiDate";
-            this.modifiDate.ReadOnly = true;
-            this.modifiDate.Width = 200;
             // 
             // Home
             // 
