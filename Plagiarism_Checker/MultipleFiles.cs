@@ -13,8 +13,10 @@ namespace Plagiarism_Checker
 {
     public partial class MultipleFiles : Form
     {
-        file[] targetFiles; 
+        private file[] targetFiles;
         private List<string> filePaths;
+        
+
         public MultipleFiles(List<string> filePaths)
         {
             InitializeComponent();
@@ -29,7 +31,23 @@ namespace Plagiarism_Checker
         }
 
 
+        private void comparator()
+        {
 
+
+
+            for(int i=0;i<targetFiles.Length;i++)
+            {
+                for(int j = 0; j < targetFiles.Length; j++)
+                {
+                   // targetFiles[i].Compare
+                }
+            }
+
+
+
+
+        }
 
 
 

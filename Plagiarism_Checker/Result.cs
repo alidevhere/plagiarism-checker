@@ -12,66 +12,31 @@ namespace Plagiarism_Checker
 {
     public partial class Result : Form
     {
-        file[] targetFiles;
-        List<string> CommonWords;
+      //  file[] targetFiles;
+      //  List<string> CommonWords;
         Color selectionColor;
+        Report rpt;
 
 
-
-        public Result(file[] targetFiles, List<string> CommonWords)
+        public Result(Report rpt,string text1,string text2)
         {
             InitializeComponent();
 
-            this.targetFiles = targetFiles;
-            this.CommonWords = CommonWords;
+            this.rpt = rpt;
+            //this.targetFiles = targetFiles;
+            //this.CommonWords = CommonWords;
             selectionColor = Color.Yellow;
-
-            ComnCount_lbl.Text = CommonWords.Count.ToString();
-
-            for (int i= 0;i < targetFiles.Length;i++)
-            {
-                fileA_dd.Items.Add(targetFiles[i].fileName);
-                fileB_dd.Items.Add(targetFiles[i].fileName);
-            }
-
+            file1.Text = rpt.file1;
+            file2.Text = rpt.file2;
+            A_rtb.Text = text1;
+            B_rtb.Text = text2;
+            colorText(A_rtb,rpt.CommonWords);
+            colorText(B_rtb, rpt.CommonWords);
 
         }
 
 
-        public Result()
-        {
-            InitializeComponent();
-        }
-
-        private void fileA_dd_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(fileB_dd.SelectedIndex== fileA_dd.SelectedIndex)
-            fileB_dd.SelectedIndex = (fileA_dd.SelectedIndex + 1)% fileB_dd.Items.Count;
-
-            A_rtb.Text = "";
-            A_rtb.Text= targetFiles[fileA_dd.SelectedIndex].unchangedFile;
-            colorText(A_rtb, CommonWords);
-            Awords_lbl.Text = targetFiles[fileA_dd.SelectedIndex].totalWords + "";
-        }
-
-        private void fileB_dd_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (fileB_dd.SelectedIndex == fileA_dd.SelectedIndex)
-                fileA_dd.SelectedIndex = (fileB_dd.SelectedIndex + 1) % fileA_dd.Items.Count;
-            B_rtb.Text = "";
-            B_rtb.Text = targetFiles[fileB_dd.SelectedIndex].unchangedFile;
-            colorText(B_rtb, CommonWords);
-            Bwords_lbl.Text= targetFiles[fileB_dd.SelectedIndex].totalWords+"";
-        }
-
-
-
-
-
-
-
-
-        private void colorText(RichTextBox rt, List<string> list)
+        private void colorText(RichTextBox rt, List<Tuple<string,int,int>> list)
         {
             // Console.WriteLine(list[0]+" len ="+list[0].Length);
             for (int i = 0; i < list.Count; i++)
@@ -81,13 +46,13 @@ namespace Plagiarism_Checker
                 while (start < rt.TextLength)
                 {
                     // Console.WriteLine("starting search at =" + start);
-                    H_index = rt.Find(list[i], start, RichTextBoxFinds.WholeWord);
+                    H_index = rt.Find(list[i].Item1, start, RichTextBoxFinds.WholeWord);
                     //  Console.WriteLine("found " + list[i] + " at index " + H_index);
 
                     if (H_index != -1)
                     {
                         rt.SelectionStart = H_index;
-                        rt.SelectionLength = list[i].Length;
+                        rt.SelectionLength = list[i].Item1.Length;
                         rt.SelectionBackColor = selectionColor;
                     }
                     else
@@ -95,7 +60,7 @@ namespace Plagiarism_Checker
                         //   Console.WriteLine("breaking loop..");
                         break;
                     }
-                    start = H_index + list[i].Length;
+                    start = H_index + list[i].Item1.Length;
 
                     //   Console.WriteLine("next start ="+start);
 
@@ -112,6 +77,11 @@ namespace Plagiarism_Checker
             color.ShowDialog();
             // MessageBox.Show(color.Color.Name+"");
             selectionColor = color.Color;
+        }
+
+        private void Result_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

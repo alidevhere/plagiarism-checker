@@ -83,7 +83,7 @@ namespace Plagiarism_Checker
             try
             {
                 FileInfo fi = new FileInfo(filePaths[0]);
-
+                Report r;
                 if (fi.Extension == ".cpp")
                 {
                     string[] f = File.ReadAllLines(filePaths[0]);
@@ -114,42 +114,27 @@ namespace Plagiarism_Checker
                     if (no_file_lbl.Text.Trim().Equals("2"))//smaller than two are handled earlier
                     {
                         file[] targetFiles = new file[filePaths.Count];
-                        int minHashIndex = 0;
                         int i = 0;
                         foreach (string path in filePaths)
                         {
-                            targetFiles[i] = new file(path);
-
-                            //find minimum length hash table
-                            if (targetFiles[i].Htable.Count <= targetFiles[minHashIndex].Htable.Count)
-                            {
-                                minHashIndex = i;
-                            }
+                            targetFiles[i] = new file(path);//building hash table
                             i++;
-
-                            Console.WriteLine("Min hash index= " + minHashIndex + " Min hash count=" + targetFiles[minHashIndex].Htable.Count);
-                            //Console.WriteLine("");
-
                         }
 
-                        //Now create list of common words which consists of least length hash table
+                        r= targetFiles[0].Compare(targetFiles[1].Htable,targetFiles[1].fileName);
 
-                        List<string> CommonWords = targetFiles[minHashIndex].Htable.Values.Cast<string>().ToList();//cast the hash table values into list
-
-                        Console.WriteLine("Common words = " + CommonWords.Count);
-
-                        for (int k = 0; k < targetFiles.Length; k++)
-                        {
-                            if (k != minHashIndex)
-                            {
-                                targetFiles[k].Compare(CommonWords);
-                            }
-                            Console.WriteLine("After checking " + k + " Common words = " + CommonWords.Count);
-                        }
+                        Console.WriteLine("File name= "+r.file1+" "+r.file2 );
+                        Console.WriteLine("Common Words: ");
 
                         this.Hide();
-                        new Result(targetFiles, CommonWords).ShowDialog();
+                        new Result(r,targetFiles[0].unchangedFile, targetFiles[1].unchangedFile).ShowDialog();
 
+
+                      //  foreach (Tuple<string, int, int> item in r.CommonWords)
+                      //  {
+                      //      Console.WriteLine("Word in file 1 "+item.Item1+"  "+item.Item2 +"  "+item.Item3);
+                      //  }
+                        
 
                     }//greater than 2
                     else

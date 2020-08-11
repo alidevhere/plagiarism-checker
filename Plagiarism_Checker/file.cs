@@ -45,12 +45,26 @@ namespace Plagiarism_Checker
 
                     string word = getWord().Trim();
                     string key = hashFunction(word);
-                    if (!Htable.ContainsKey(key)&&((!String.IsNullOrEmpty(word)) && (!String.IsNullOrWhiteSpace(word))))
+                    if (((!String.IsNullOrEmpty(word)) && (!String.IsNullOrWhiteSpace(word))))
                     {
+                        Word w = new Word(word);
+                        if(Htable.ContainsKey(key))//word already exists in hash table means we just have to increament count
+                        {
+                            w = (Word)Htable[key];
+                            w.increment();
+                            Htable[key] = w;
+                            Console.WriteLine("Word = "+w.word+"  count= "+w.count);
+                            nextWord();
 
-                        Htable.Add(key, word);
-                       // Console.WriteLine("word= " + word + " key= " + key);
-                        nextWord();
+                        }
+                        else
+                        {
+                            Console.WriteLine("New Word = " + w.word + "  count= " + w.count);
+                            Htable.Add(key, w);
+                            nextWord();
+                        }
+
+
                     }
                     else
                     {
@@ -75,7 +89,9 @@ namespace Plagiarism_Checker
 
         public string hashFunction(string str)
         {
+            //97->122
             string r = "";
+            str=str.ToLower();
             for (int i = 0; i < str.Length; i++)
             {
                 r += ((int)str[i] - 33);
@@ -123,6 +139,48 @@ namespace Plagiarism_Checker
                 }
             }
         }
+
+
+
+        public Report Compare(Hashtable obj,string fileName)
+        {
+            Console.WriteLine(" COMPARE FUNCTION :");
+            Report rp= new Report(this.fileName,fileName);
+            foreach(string key in  minHashIndex(obj))
+            {
+                if(obj.ContainsKey(key) && this.Htable.ContainsKey(key))
+                {
+                    Word w1 = (Word)this.Htable[key];
+                    Word w2= (Word)obj[key];
+                    Tuple<string, int, int> t = new Tuple<string, int, int>(w1.word,w1.count,w2.count) ;
+                    Console.WriteLine(w1.word+"  " +w1.count+"  " +w2.count);
+
+                    rp.CommonWords.Add(t);
+                }
+            }
+
+            return rp;
+        }
+
+        private ICollection minHashIndex(Hashtable Htable)
+        {
+            if(this.Htable.Count<=Htable.Count)
+            {
+                return this.Htable.Keys;
+            }
+            else
+            {
+                return Htable.Keys;
+            }
+        }
+
+
+
+
+
+
+
+
 
     }
 }
